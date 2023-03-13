@@ -55,8 +55,11 @@ my_cur = my_cnx.cursor()
 my_cur.execute("SELECT * FROM fruit_load_list")
 my_data_row = my_cur.fetchall()
 #streamlit.text("Greetings Earthling, you have made connection with the following:")
+#output
 streamlit.text("The fruit load list contains:")
 streamlit.text(my_data_row)
+streamlit.dataframe(my_data_row)
+
 
 #User input of fruit
 add_my_fruit = streamlit.text_input('What fruit would you like to add?','jackfruit')
