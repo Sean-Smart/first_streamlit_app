@@ -1,5 +1,10 @@
 #Main body
 import streamlit
+import pandas
+import requests
+import snowflake.connector
+from urllib.error import URLError
+
 streamlit.title('Snowflake Diner')
 
 streamlit.header('Food made by Sean, For Sean (out of Sean)')
@@ -13,7 +18,6 @@ streamlit.text('🥑🍞Avacado on toast')
 streamlit.header('🍌🥭 Build Your Own Fruit Smoothie 🥝🍇')
 
 
-import pandas
 #Load table
 my_fruit_list = pandas.read_csv("https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt")
 #Set index
@@ -27,7 +31,7 @@ fruits_to_show = my_fruit_list.loc[fruits_selected]
 #Display table
 streamlit.dataframe(my_fruit_list)
 
-import requests
+
 streamlit.header("Fruityvice Fruit Advice!")
 fruit_choice = streamlit.text_input('What fruit would you like information about?','Kiwi')
 streamlit.write('The user entered ', fruit_choice)
@@ -44,9 +48,9 @@ streamlit.dataframe(fruityvice_normalized)
 
 
 
-
+streamlit.stop()
 #Adding snowflake connector functionality
-import snowflake.connector
+
 
 #This allows you to execute SQL queries I think
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
