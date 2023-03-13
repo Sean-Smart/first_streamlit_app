@@ -57,3 +57,8 @@ my_data_row = my_cur.fetchone()
 #streamlit.text("Greetings Earthling, you have made connection with the following:")
 streamlit.text("The fruit load list contains:")
 streamlit.text(my_data_row)
+
+#User input of fruit
+add_my_fruit = streamlit.text_input('What fruit would you like to add?','jackfruit')
+streamlit.write('Thanks for adding ', add_my_fruit)
+
