@@ -1,5 +1,4 @@
-import snowflake.connector
-
+#Main body
 import streamlit
 streamlit.title('Snowflake Diner')
 
@@ -42,3 +41,17 @@ fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+fruit_cho
 fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
 #disaply df
 streamlit.dataframe(fruityvice_normalized)
+
+
+
+
+#Adding snowflake connector functionality
+import snowflake.connector
+
+#
+my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+my_cur = my_cnx.cursor()
+my_cur.execute("SELECT CURRENT_USER(), CURRENT_ACCOUNT(), CURRENT_REGION()")
+my_data_row = my_cur.fetchone()
+streamlit.text("Greetings Earthling, you have made connection with the following:")
+streamlit.text(my_data_row)
