@@ -91,5 +91,5 @@ if streamlit.button('Add a fruit to the list'):
 
     
 #New feature
-my_cur.execute("INSERT INTO fruit_load_list values ('from streamlit')")
+#my_cur.execute("INSERT INTO fruit_load_list values ('from streamlit')")
 
