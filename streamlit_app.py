@@ -55,21 +55,43 @@ except URLError as e:
     streamlit.error(e)
 
 
-streamlit.stop()
+  
+  
+
 #Adding snowflake connector functionality
 
 
 #This allows you to execute SQL queries I think
-my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
-my_cur = my_cnx.cursor()
+#my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+#my_cur = my_cnx.cursor()
 #my_cur.execute("SELECT CURRENT_USER(), CURRENT_ACCOUNT(), CURRENT_REGION()")
-my_cur.execute("SELECT * FROM fruit_load_list")
-my_data_row = my_cur.fetchall()
+#my_cur.execute("SELECT * FROM fruit_load_list")
+#my_data_row = my_cur.fetchall()
 #streamlit.text("Greetings Earthling, you have made connection with the following:")
 #output
+
+
+
+
+
 streamlit.text("The fruit load list contains:")
-streamlit.text(my_data_row)
-streamlit.dataframe(my_data_row)
+#snowflake related functions:
+def get_fruit_load_list():
+     with my_cnx.cursor() as my_cur:
+     my_cur.execute("SELECT * FROM fruit_load_list")
+     return my_cur.fetchall()
+    
+ #Adda button to load the fruit
+ if streamlit.button('Get fruit load list'):
+     my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+     my_data_rows = get_fruit_load_list()
+     streamlit.dataframe(my_data_rows)
+     
+     
+streamlit.stop() 
+ 
+#streamlit.text(my_data_row)
+#streamlit.dataframe(my_data_row)
 
 
 #User input of fruit
